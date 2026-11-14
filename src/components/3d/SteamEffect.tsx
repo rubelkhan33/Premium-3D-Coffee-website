@@ -61,6 +61,7 @@ export const SteamEffect: React.FC<SteamEffectProps> = ({ pointerPos = { x: 0, y
     ctx.fillRect(0, 0, 128, 128);
 
     const tex = new THREE.CanvasTexture(canvas);
+    tex.needsUpdate = true;
 
     return {
       positions: pos,

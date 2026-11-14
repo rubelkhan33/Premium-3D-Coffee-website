@@ -1,6 +1,6 @@
-import React, { useRef, useMemo, Suspense } from 'react';
+import React, { useRef, useMemo } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
-import { Float, ContactShadows } from '@react-three/drei';
+import { Float } from '@react-three/drei';
 import * as THREE from 'three';
 import { CeramicCup } from './CeramicCup';
 import { SteamEffect } from './SteamEffect';
@@ -151,23 +151,9 @@ export const HeroCupScene: React.FC<HeroCupSceneProps> = ({
         {/* Soft fill bounce light */}
         <pointLight position={[0, -2.5, 2.5]} intensity={0.65} color="#d4a373" />
 
-        <Suspense fallback={null}>
-          <CeramicCup pointerPos={pointerPos} scrollYProgress={scrollYProgress} />
-          <SteamEffect pointerPos={pointerPos} />
-          <SparseHeroBeans pointerPos={pointerPos} />
-
-          {/* Optimized static ground contact shadow (renders once, zero per-frame cost) */}
-          <ContactShadows
-            position={[0, -0.48, 0]}
-            opacity={0.7}
-            scale={7}
-            blur={2.2}
-            far={3.5}
-            resolution={256}
-            frames={1}
-            color="#080402"
-          />
-        </Suspense>
+        <CeramicCup pointerPos={pointerPos} scrollYProgress={scrollYProgress} />
+        <SteamEffect pointerPos={pointerPos} />
+        <SparseHeroBeans pointerPos={pointerPos} />
       </Canvas>
     </div>
   );

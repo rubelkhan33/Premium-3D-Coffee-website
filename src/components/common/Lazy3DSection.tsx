@@ -38,7 +38,12 @@ export const Lazy3DSection: React.FC<Lazy3DSectionProps> = ({
 
     observer.observe(el);
 
+    const timer = setTimeout(() => {
+      setShouldRender(true);
+    }, 1500);
+
     return () => {
+      clearTimeout(timer);
       observer.disconnect();
     };
   }, [rootMargin]);

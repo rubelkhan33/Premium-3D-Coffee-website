@@ -1,6 +1,6 @@
 import React, { useRef, useState, useMemo } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
-import { Html, OrbitControls, ContactShadows } from '@react-three/drei';
+import { Html, OrbitControls } from '@react-three/drei';
 import * as THREE from 'three';
 import { SIGNATURE_DRINK } from '../../data/coffeeContent';
 import { soundManager } from '../../audio/soundManager';
@@ -62,17 +62,24 @@ const GlassTumbler: React.FC = () => {
 
   return (
     <group ref={meshRef} position={[0, -1.2, 0]}>
-      {/* Heavy bottom glass tumbler */}
+      {/* Heavy bottom glass tumbler with frosty physical appearance */}
       <mesh geometry={glassGeo}>
         <meshPhysicalMaterial
-          roughness={0.04}
-          transmission={0.93}
-          thickness={1.3}
-          ior={1.52}
-          color="#ffffff"
-          clearcoat={1.0}
-          clearcoatRoughness={0.05}
+          roughness={0.16}
+          transmission={0.65}
+          thickness={0.8}
+          ior={1.46}
+          color="#f4f8fb"
+          transparent
+          opacity={0.85}
+          clearcoat={0.6}
         />
+      </mesh>
+
+      {/* Ground contact shadow */}
+      <mesh position={[0, -0.01, 0]} rotation={[-Math.PI / 2, 0, 0]}>
+        <circleGeometry args={[1.8, 32]} />
+        <meshBasicMaterial color="#080402" transparent opacity={0.55} depthWrite={false} />
       </mesh>
 
       {/* Layer 1: Milk Base */}
@@ -192,17 +199,6 @@ export const SignatureCupScene: React.FC<SignatureCupProps> = ({ pointerPos }) =
         <pointLight position={[0, -2, 2]} intensity={0.8} color="#d4a373" />
 
         <GlassTumbler />
-
-        <ContactShadows
-          position={[0, -1.25, 0]}
-          opacity={0.65}
-          scale={5.5}
-          blur={2.2}
-          far={3}
-          resolution={256}
-          frames={1}
-          color="#0a0502"
-        />
 
         <OrbitControls
           enableZoom={false}
