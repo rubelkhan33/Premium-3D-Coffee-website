@@ -3,6 +3,7 @@ import { SIGNATURE_DRINK } from '../../data/coffeeContent';
 import { SignatureCupScene } from '../3d/SignatureCupScene';
 import { Sparkles, GlassWater, Compass } from 'lucide-react';
 import { soundManager } from '../../audio/soundManager';
+import { Lazy3DSection } from '../common/Lazy3DSection';
 
 interface SignatureSectionProps {
   onOrderSignature: () => void;
@@ -31,7 +32,9 @@ export const SignatureSection: React.FC<SignatureSectionProps> = ({ onOrderSigna
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
           {/* Left: 3D Interactive Glass Scene */}
           <div className="lg:col-span-7 h-[460px] sm:h-[560px] md:h-[620px] w-full rounded-3xl bg-espresso-900/30 border border-amber-copper/20 relative overflow-hidden shadow-2xl">
-            <SignatureCupScene pointerPos={pointerPos} />
+            <Lazy3DSection minHeight="460px">
+              <SignatureCupScene pointerPos={pointerPos} />
+            </Lazy3DSection>
 
             {/* Interaction note */}
             <div className="absolute bottom-5 left-5 flex items-center gap-2 text-[11px] text-cream-300/60 bg-espresso-950/70 px-3.5 py-1.5 rounded-full border border-white/10 backdrop-blur-md pointer-events-none">

@@ -182,8 +182,8 @@ export const SignatureCupScene: React.FC<SignatureCupProps> = ({ pointerPos }) =
     <div className="w-full h-full relative" data-cursor="drag" data-cursor-label="ROTATE">
       <Canvas
         camera={{ position: [0, 1.2, 5.8], fov: 38 }}
-        dpr={[1, Math.min(window.devicePixelRatio, 1.75)]}
-        gl={{ antialias: true, alpha: true }}
+        dpr={[1, 1.5]}
+        gl={{ antialias: true, alpha: true, powerPreference: 'high-performance' }}
         className="w-full h-full"
       >
         <ambientLight intensity={0.95} color="#fff6ea" />
@@ -199,6 +199,8 @@ export const SignatureCupScene: React.FC<SignatureCupProps> = ({ pointerPos }) =
           scale={5.5}
           blur={2.2}
           far={3}
+          resolution={256}
+          frames={1}
           color="#0a0502"
         />
 

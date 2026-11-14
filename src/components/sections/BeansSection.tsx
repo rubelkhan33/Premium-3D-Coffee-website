@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { FloatingBeans } from '../3d/FloatingBeans';
 import { Sparkles, Compass } from 'lucide-react';
+import { Lazy3DSection } from '../common/Lazy3DSection';
 
 export const BeansSection: React.FC = () => {
   const [pointerPos, setPointerPos] = useState({ x: 0, y: 0 });
@@ -42,7 +43,9 @@ export const BeansSection: React.FC = () => {
 
         {/* 3D Canvas Stage */}
         <div className="relative h-[480px] sm:h-[580px] w-full rounded-3xl border border-white/10 bg-espresso-900/40 backdrop-blur-sm overflow-hidden shadow-2xl">
-          <FloatingBeans pointerPos={pointerPos} />
+          <Lazy3DSection minHeight="480px">
+            <FloatingBeans pointerPos={pointerPos} />
+          </Lazy3DSection>
 
           {/* Interactive Hint Badge */}
           <div className="absolute bottom-6 left-6 flex items-center gap-2 text-xs text-cream-300/60 bg-espresso-950/70 border border-white/10 px-3.5 py-1.5 rounded-full backdrop-blur-md pointer-events-none">

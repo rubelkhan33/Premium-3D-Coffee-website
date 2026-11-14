@@ -91,8 +91,8 @@ export const FloatingBeans: React.FC<{ pointerPos: { x: number; y: number } }> =
     <div className="w-full h-full relative" data-cursor="hover" data-cursor-label="REPEL">
       <Canvas
         camera={{ position: [0, 0, 7.5], fov: 45 }}
-        dpr={[1, Math.min(window.devicePixelRatio, 1.75)]}
-        gl={{ antialias: true, alpha: true }}
+        dpr={[1, 1.5]}
+        gl={{ antialias: true, alpha: true, powerPreference: 'high-performance' }}
         className="w-full h-full"
       >
         <ambientLight intensity={0.75} color="#fbf8f3" />

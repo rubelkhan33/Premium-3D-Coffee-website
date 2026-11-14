@@ -1,6 +1,6 @@
 import React, { useRef, useMemo, Suspense } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
-import { Environment, Float, ContactShadows } from '@react-three/drei';
+import { Float, ContactShadows } from '@react-three/drei';
 import * as THREE from 'three';
 import { CeramicCup } from './CeramicCup';
 import { SteamEffect } from './SteamEffect';
@@ -116,7 +116,7 @@ export const HeroCupScene: React.FC<HeroCupSceneProps> = ({
     <div className="w-full h-full relative" data-cursor="drag" data-cursor-label="TILT">
       <Canvas
         camera={{ position: [0, 0.5, 6.2], fov: 42 }}
-        dpr={[1, Math.min(window.devicePixelRatio, 1.75)]}
+        dpr={[1, 1.5]}
         gl={{
           antialias: true,
           powerPreference: 'high-performance',
@@ -126,8 +126,9 @@ export const HeroCupScene: React.FC<HeroCupSceneProps> = ({
       >
         <CameraRig pointerPos={pointerPos} scrollYProgress={scrollYProgress} />
 
-        {/* Cinematic Warm Studio Lighting */}
+        {/* Fast, zero-network warm studio lighting */}
         <ambientLight intensity={0.9} color="#fff8ee" />
+        <hemisphereLight intensity={0.65} color="#fff8ee" groundColor="#23160e" />
         
         {/* Key Light: warm directional sunlight */}
         <directionalLight
@@ -135,8 +136,8 @@ export const HeroCupScene: React.FC<HeroCupSceneProps> = ({
           intensity={2.8}
           color="#ffeed8"
           castShadow
-          shadow-mapSize-width={1024}
-          shadow-mapSize-height={1024}
+          shadow-mapSize-width={512}
+          shadow-mapSize-height={512}
           shadow-bias={-0.0001}
         />
 
@@ -155,17 +156,17 @@ export const HeroCupScene: React.FC<HeroCupSceneProps> = ({
           <SteamEffect pointerPos={pointerPos} />
           <SparseHeroBeans pointerPos={pointerPos} />
 
-          {/* Hyper-realistic ground contact shadow beneath saucer */}
+          {/* Optimized static ground contact shadow (renders once, zero per-frame cost) */}
           <ContactShadows
             position={[0, -0.48, 0]}
             opacity={0.7}
             scale={7}
-            blur={2.5}
+            blur={2.2}
             far={3.5}
+            resolution={256}
+            frames={1}
             color="#080402"
           />
-
-          <Environment preset="city" environmentIntensity={0.25} />
         </Suspense>
       </Canvas>
     </div>
