@@ -57,10 +57,10 @@ An original, production-grade, premium 3D coffee shop digital brand experience b
 
 ```bash
 # Clone the repository
-git clone https://github.com/Phitron-batc/3D-Coffee-Shop.git
+git clone https://github.com/rubelkhan33/Premium-3D-Coffee-website.git
 
 # Navigate into the project directory
-cd 3D-Coffee-Shop
+cd Premium-3D-Coffee-website
 
 # Install dependencies
 npm install
